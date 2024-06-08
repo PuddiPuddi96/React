@@ -1,3 +1,4 @@
+import cors from 'cors'
 import express from 'express';
 import mongoose from 'mongoose';
 
@@ -7,8 +8,22 @@ import { PORT, MONGODB_URL } from './config.js'
 
 const app = express();
 
-//For parsing request body
+//Middleware for parsing request body
 app.use(express.json());
+
+//Middleware for handling CORS policy
+
+//Allows all
+app.use(cors());
+
+//Allow custom origins
+// app.use(
+//     cors({
+//         origin: 'http://localhost:3000',
+//         methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//         allowedHeaders: ['Content-Type']
+//     })
+// );
 
 app.get('/', (request, response) => {
     console.log(request);
