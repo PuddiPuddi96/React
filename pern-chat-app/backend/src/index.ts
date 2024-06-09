@@ -1,6 +1,11 @@
 import express, { Request, Response } from 'express';
+import authRoutes from './routes/auth.route.js';
+import messageRoutes from './routes/message.route.js'
 
 const app = express();
+
+app.use('/api/auth', authRoutes);
+app.use('/api/message', messageRoutes);
 
 app.get('/', (request: Request, response: Response) => {
   response.send('Hello world2!');
