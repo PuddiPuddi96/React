@@ -81,18 +81,24 @@ export const login = async (request: Request, response: Response) => {
 
     generateToken(user.id, response);
 
-    response.status(201).json({
+    response.status(200).json({
       id: user.id,
       fullname: user.fullname,
       username: user.username,
       profilePic: user.profilePic
     })
   } catch (error: any) {
-    console.log('Error in signup controller', error.message);
+    console.log('Error in login controller', error.message);
     return response.status(500).json({error: "Internal server error"});
   }
 };
 
 export const logout = async (request: Request, response: Response) => {
-
+  try {
+    response.cookie("jwt", "", {maxAge: 0})
+    response.status(200).json({message: "Logged out successfully"})
+  } catch (error: any) {
+    console.log('Error in logout controller', error.message);
+    return response.status(500).json({error: "Internal server error"});
+  }
 };
