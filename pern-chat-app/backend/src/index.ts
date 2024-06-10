@@ -3,9 +3,10 @@ import authRoutes from './routes/auth.route.js';
 import messageRoutes from './routes/message.route.js'
 import dotnev from 'dotenv'
 
+dotnev.config();
 const app = express();
 
-dotnev.config();
+app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/message', messageRoutes);
