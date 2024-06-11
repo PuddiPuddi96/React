@@ -1,9 +1,9 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import protectRoute from '../middlewares/protectRoute.js';
+import { sendMessage } from '../controllers/message.controller.js';
 
 const router = express.Router();
 
-router.get('/conversation', (request: Request, response: Response) => {
-  response.send('conversation route');
-});
+router.post('/send/:id', protectRoute, sendMessage);
 
 export default router;
