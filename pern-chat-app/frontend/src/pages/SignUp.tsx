@@ -11,7 +11,15 @@ const SignUp = () => {
     gender: "",
   });
 
-  const {loading, signup} = useSignup();
+  const handleCheckBoxChange = (gender: "male" | "female") => {
+		setInputs({...inputs, gender});
+	};
+
+	const handleSubmitForm = (e: React.FormEvent) => {
+		e.preventDefault();
+		console.log(inputs);
+	};
+
   return (
 		<div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
 			<div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
@@ -28,8 +36,8 @@ const SignUp = () => {
 							type='text'
 							placeholder='John Doe'
 							className='w-full input input-bordered  h-10'
-							value={inputs.fullName}
-							onChange={(e) => setInputs({ ...inputs, fullName: e.target.value })}
+							value={inputs.fullname}
+							onChange={(e) => setInputs({ ...inputs, fullname: e.target.value })}
 						/>
 					</div>
 
@@ -72,7 +80,7 @@ const SignUp = () => {
 						/>
 					</div>
 
-					<GenderCheckbox selectedGender={inputs.gender} onCheckboxChange={handleCheckboxChange} />
+					<GenderCheckBox selectedGender={inputs.gender} onCheckBoxChange={handleCheckBoxChange} />
 
 					<Link
 						to={"/login"}
