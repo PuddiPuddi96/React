@@ -7,9 +7,9 @@ export const sendMessage = async (request: Request, response: Response) => {
     const {id:receiverId} = request.params;
     const senderId = request.user.id;
 
-    let conversation = await prisma.conversation.findFirt({
+    let conversation = await prisma.conversation.findFirst({
       where: {
-        partecipantIds: {
+        participantIds: {
           hasEvery: [senderId, receiverId]
         }
       }
@@ -18,7 +18,7 @@ export const sendMessage = async (request: Request, response: Response) => {
     if(!conversation){
       conversation = await prisma.conversation.create({
         data: {
-          partecipantIds: {
+          participantIds: {
             set: [senderId, receiverId]
           }
         }
@@ -61,20 +61,21 @@ export const getMessages = async (request: Request, response: Response) => {
     const {id: userToChatId} = request.params;
     const senderId = request.user.id;
 
-    const conversation = await prisma.conversation.findFirt({
+    const conversation = await prisma.conversation.findFirst({
       where: {
         participantIds: {
           hasEvery: [senderId, userToChatId]
         },
-        include: {
-          messages: {
-            orderBy: {
-              createdAt: "asc"
-            }
+      },
+      include: {
+        messages: {
+          orderBy: {
+            createdAt: "asc"
           }
         }
       }
-    })
+    }
+  )
 
     if(!conversation){
       return response.status(200).json([])
