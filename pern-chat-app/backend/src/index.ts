@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 
 dotnev.config();
 const app = express();
+const PORT = process.env.PORT || 5001;
 
 app.use(cookieParser());
 app.use(express.json());
@@ -17,6 +18,6 @@ app.get('/', (request: Request, response: Response) => {
   response.send('Hello world2!');
 });
 
-app.listen(5000, () => {
-  console.log('Server is running on port 5000!')
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}!`)
 });
