@@ -59,7 +59,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
   const obj = useMemo(
     () => ({ authUser, isLoading, setAuthUser }),
-    [authUser, isLoading]
+    [authUser, isLoading, setAuthUser]
   );
 
   return <AuthContext.Provider value={obj}>{children}</AuthContext.Provider>;
