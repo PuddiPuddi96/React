@@ -8,5 +8,6 @@ type MessageType = {
   id: string,
   body: string,
   senderId: string,
-  createdAt: string
+  createdAt: string,
+  shouldShake?: boolean
 };
